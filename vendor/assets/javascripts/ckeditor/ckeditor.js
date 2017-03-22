@@ -1,5 +1,5 @@
 
-(function(){if(window.CKEDITOR&&window.CKEDITOR.dom)return;if(!window.CKEDITOR){window.CKEDITOR=(function(){var basePathSrcPattern=/(^|.*[\\\/])ckeditor\.js(?:\?.*|;.*)?$/i;var CKEDITOR={timestamp:'H2G2',version:'4.5.3 DEV',revision:'875dacd',rnd:Math.floor(Math.random()*(999-100+1))+100,_:{pending:[],basePathSrcPattern:basePathSrcPattern},status:'unloaded',basePath:(function(){var path=window.CKEDITOR_BASEPATH||'';if(!path){var scripts=document.getElementsByTagName('script');for(var i=0;i<scripts.length;i++){var match=scripts[i].src.match(basePathSrcPattern);if(match){path=match[1];break;}}}
+(function(){if(window.CKEDITOR&&window.CKEDITOR.dom)return;if(!window.CKEDITOR){window.CKEDITOR=(function(){var basePathSrcPattern=/(^|.*[\\\/])ckeditor\.js(?:\?.*|;.*)?$/i;var CKEDITOR={timestamp:'H2M7',version:'4.5.3 DEV',revision:'5318708',rnd:Math.floor(Math.random()*(999-100+1))+100,_:{pending:[],basePathSrcPattern:basePathSrcPattern},status:'unloaded',basePath:(function(){var path=window.CKEDITOR_BASEPATH||'';if(!path){var scripts=document.getElementsByTagName('script');for(var i=0;i<scripts.length;i++){var match=scripts[i].src.match(basePathSrcPattern);if(match){path=match[1];break;}}}
 if(path.indexOf(':/')==-1&&path.slice(0,2)!='//'){if(path.indexOf('/')===0)
 path=location.href.match(/^.*?:\/\/[^\/]*/)[0]+path;else
 path=location.href.match(/^[^\?]*\/(?:)/)[0]+path;}
@@ -2658,6 +2658,7 @@ var iconColors=config.colorButton_colors.map(function(color){return color[1]});i
 var classNames=colors.map(function(color){return config.colorButton_colorClassNamePattern.replace('%s',color)});if(!CKEDITOR.env.hc){addButton('TextColor','fore',lang.textColorTitle,10);}
 var customColorRowId=CKEDITOR.tools.getNextId()+'_customColor';var customColorIds={custom1:CKEDITOR.tools.getNextId()+'_customColor',custom2:CKEDITOR.tools.getNextId()+'_customColor'};function addButton(name,type,title,order){if(type==='fore'){var style={'caption div h1 h2 h3 h4 h5 h6 p pre td th li':{propertiesOnly:true,classes:classNames.join(',')}}}else{var style=new CKEDITOR.style(config['colorButton_'+type+'Style'])}
 var colorBoxId=CKEDITOR.tools.getNextId()+'_colorBox';editor.on('selectionChange',function(e){var btn=editor.ui.get(name)
+if(!btn){return}
 var element=CKEDITOR.document.getById(btn._.id);var span=element.find('.cke_button_icon').getItem(0)
 if(editor.config.advancedEditor){var computedColor=e.data.selection.getStartElement().getComputedStyle('color')}else{var path=editor.elementPath();var firstBlock=path.block||path.blockLimit;var computedColor=firstBlock.getComputedStyle('color');}
 var iconStyles=config.colorButton_iconStyles(computedColor)
