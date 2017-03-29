@@ -1,5 +1,5 @@
 
-(function(){if(window.CKEDITOR&&window.CKEDITOR.dom)return;if(!window.CKEDITOR){window.CKEDITOR=(function(){var basePathSrcPattern=/(^|.*[\\\/])ckeditor\.js(?:\?.*|;.*)?$/i;var CKEDITOR={timestamp:'H2SC',version:'4.5.3 DEV',revision:'9fe173d',rnd:Math.floor(Math.random()*(999-100+1))+100,_:{pending:[],basePathSrcPattern:basePathSrcPattern},status:'unloaded',basePath:(function(){var path=window.CKEDITOR_BASEPATH||'';if(!path){var scripts=document.getElementsByTagName('script');for(var i=0;i<scripts.length;i++){var match=scripts[i].src.match(basePathSrcPattern);if(match){path=match[1];break;}}}
+(function(){if(window.CKEDITOR&&window.CKEDITOR.dom)return;if(!window.CKEDITOR){window.CKEDITOR=(function(){var basePathSrcPattern=/(^|.*[\\\/])ckeditor\.js(?:\?.*|;.*)?$/i;var CKEDITOR={timestamp:'H2T4',version:'4.5.3 DEV',revision:'4049f21',rnd:Math.floor(Math.random()*(999-100+1))+100,_:{pending:[],basePathSrcPattern:basePathSrcPattern},status:'unloaded',basePath:(function(){var path=window.CKEDITOR_BASEPATH||'';if(!path){var scripts=document.getElementsByTagName('script');for(var i=0;i<scripts.length;i++){var match=scripts[i].src.match(basePathSrcPattern);if(match){path=match[1];break;}}}
 if(path.indexOf(':/')==-1&&path.slice(0,2)!='//'){if(path.indexOf('/')===0)
 path=location.href.match(/^.*?:\/\/[^\/]*/)[0]+path;else
 path=location.href.match(/^[^\?]*\/(?:)/)[0]+path;}
@@ -2052,7 +2052,8 @@ return;var style=new CKEDITOR.style(styleDefiniton),forms=contentForms[commandNa
 var subStyle=CKEDITOR.skin.getIconStyle('subscript',false),supStyle=CKEDITOR.skin.getIconStyle('superscript',false);reHtml+='<a class="cke_button ck_btn_with_gray_border_top" onclick="CKEDITOR.tools.callFunction('+clickFn+', \'sub\')" data-type="sub" style="float: left;outline: none;"><span class="cke_button_icon cke_button__subscript_icon" style="'+subStyle+'"></span></a>'
 reHtml+='<a class="cke_button ck_btn_with_gray_border_top" onclick="CKEDITOR.tools.callFunction('+clickFn+', \'sup\')" data-type="sup" style="float: left;outline: none;"><span class="cke_button_icon cke_button__superscript_icon" style="'+supStyle+'"></span></a>'
 return reHtml}
-function onSelectionChange(toobarName,blockEl){var editor=this;var el=editor.getSelection().getStartElement();var btn=editor.ui.get(toolbarName);var element=CKEDITOR.document.getById(btn._.id);var span=element.find('.cke_button_icon').getItem(0);var arrow=element.find('.cke_button_arrow').getItem(0);span.setText('...')
+function onSelectionChange(toobarName,blockEl){var editor=this;var el=editor.getSelection().getStartElement();var btn=editor.ui.get(toolbarName);if(!btn){return}
+var element=CKEDITOR.document.getById(btn._.id);var span=element.find('.cke_button_icon').getItem(0);var arrow=element.find('.cke_button_arrow').getItem(0);span.setText('...')
 span.setStyles({'color':'white','text-align':'center','font-size':'18px','position':'relative','top':'-6px'})
 if(arrow){arrow.remove()}
 var elType=el.getName()
