@@ -1,5 +1,5 @@
 
-(function(){if(window.CKEDITOR&&window.CKEDITOR.dom)return;if(!window.CKEDITOR){window.CKEDITOR=(function(){var basePathSrcPattern=/(^|.*[\\\/])ckeditor\.js(?:\?.*|;.*)?$/i;var CKEDITOR={timestamp:'H2T4',version:'4.5.3 DEV',revision:'4049f21',rnd:Math.floor(Math.random()*(999-100+1))+100,_:{pending:[],basePathSrcPattern:basePathSrcPattern},status:'unloaded',basePath:(function(){var path=window.CKEDITOR_BASEPATH||'';if(!path){var scripts=document.getElementsByTagName('script');for(var i=0;i<scripts.length;i++){var match=scripts[i].src.match(basePathSrcPattern);if(match){path=match[1];break;}}}
+(function(){if(window.CKEDITOR&&window.CKEDITOR.dom)return;if(!window.CKEDITOR){window.CKEDITOR=(function(){var basePathSrcPattern=/(^|.*[\\\/])ckeditor\.js(?:\?.*|;.*)?$/i;var CKEDITOR={timestamp:'H438',version:'4.5.3 DEV',revision:'4049f218a',rnd:Math.floor(Math.random()*(999-100+1))+100,_:{pending:[],basePathSrcPattern:basePathSrcPattern},status:'unloaded',basePath:(function(){var path=window.CKEDITOR_BASEPATH||'';if(!path){var scripts=document.getElementsByTagName('script');for(var i=0;i<scripts.length;i++){var match=scripts[i].src.match(basePathSrcPattern);if(match){path=match[1];break;}}}
 if(path.indexOf(':/')==-1&&path.slice(0,2)!='//'){if(path.indexOf('/')===0)
 path=location.href.match(/^.*?:\/\/[^\/]*/)[0]+path;else
 path=location.href.match(/^[^\?]*\/(?:)/)[0]+path;}
@@ -2776,7 +2776,7 @@ this.setState(CKEDITOR.TRISTATE_ON);_.on=1;setTimeout(function(){menu.show(CKEDI
 return 100;}
 function sizeCommand(editor,name,value){this.editor=editor;this.name=name;this.value=value;this.context='p';}
 sizeCommand.prototype.exec=function(editor){var selection=editor.getSelection();if(!selection){return;}
-var bookmarks=selection.createBookmarks();if(this.editor.config.advancedEditor){var ranges=selection.getRanges()||[];var _this=this;function getBlockContainer(element){var elName=element.getName();var parent=element.getParent(),pName=parent.getName(),isContainer=parent.getAttribute('contenteditable')&&pName==='div'
+var bookmarks=selection.createBookmarks();if(this.editor.config.advancedEditor){var ranges=selection.getRanges()||[];var _this=this;function getBlockContainer(element){var elName=element.getName();var parent=element.getParent(),pName=parent.getName(),isContainer=parent.getAttribute('contenteditable')&&pName==='div'&&elName!=='ul'&&elName!=='ol'
 if(elName==='p'||elName==='li'||isContainer){return element;}else{return getBlockContainer(parent);}}
 ranges.map(function(range){var walker=new CKEDITOR.dom.walker(range);var element=walker.next()||range.endPath().elements[0];while(element){if(element.type===CKEDITOR.NODE_TEXT){element=element.getParent();}
 element=getBlockContainer(element);if(_this.value){element.setStyle('font-size',_this.value+'%')}
