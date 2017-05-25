@@ -1,5 +1,5 @@
 
-(function(){if(window.CKEDITOR&&window.CKEDITOR.dom)return;if(!window.CKEDITOR){window.CKEDITOR=(function(){var basePathSrcPattern=/(^|.*[\\\/])ckeditor\.js(?:\?.*|;.*)?$/i;var CKEDITOR={timestamp:'H438',version:'4.5.3 DEV',revision:'4049f218a',rnd:Math.floor(Math.random()*(999-100+1))+100,_:{pending:[],basePathSrcPattern:basePathSrcPattern},status:'unloaded',basePath:(function(){var path=window.CKEDITOR_BASEPATH||'';if(!path){var scripts=document.getElementsByTagName('script');for(var i=0;i<scripts.length;i++){var match=scripts[i].src.match(basePathSrcPattern);if(match){path=match[1];break;}}}
+(function(){if(window.CKEDITOR&&window.CKEDITOR.dom)return;if(!window.CKEDITOR){window.CKEDITOR=(function(){var basePathSrcPattern=/(^|.*[\\\/])ckeditor\.js(?:\?.*|;.*)?$/i;var CKEDITOR={timestamp:'H4P3',version:'4.5.3 DEV',revision:'c719615c6',rnd:Math.floor(Math.random()*(999-100+1))+100,_:{pending:[],basePathSrcPattern:basePathSrcPattern},status:'unloaded',basePath:(function(){var path=window.CKEDITOR_BASEPATH||'';if(!path){var scripts=document.getElementsByTagName('script');for(var i=0;i<scripts.length;i++){var match=scripts[i].src.match(basePathSrcPattern);if(match){path=match[1];break;}}}
 if(path.indexOf(':/')==-1&&path.slice(0,2)!='//'){if(path.indexOf('/')===0)
 path=location.href.match(/^.*?:\/\/[^\/]*/)[0]+path;else
 path=location.href.match(/^[^\?]*\/(?:)/)[0]+path;}
@@ -2666,7 +2666,8 @@ var iconStyles=config.colorButton_iconStyles(computedColor)
 span.setStyles(iconStyles)
 span.setAttribute('title',(editor.lang.colorbutton.textColorTitle||''))})
 editor.ui.add(name,CKEDITOR.UI_PANELBUTTON,{modes:{wysiwyg:1},editorFocus:0,toolbar:'colors,'+order,allowedContent:style,requiredContent:style,panel:{css:CKEDITOR.skin.getPath('editor'),attributes:{role:'listbox','aria-label':''}},onBlock:function(panel,block){block.autoSize=true;block.element.addClass('cke_colorblock');block.element.setStyle('width','94px');block.element.setStyle('outline','none');block.element.setHtml(renderColors(panel,type,colorBoxId));block.element.getDocument().getBody().setStyle('overflow','hidden');CKEDITOR.ui.fire('ready',this);var keys=block.keys;var rtl=editor.lang.dir=='rtl';keys[rtl?37:39]='next';keys[40]='next';keys[9]='next';keys[rtl?39:37]='prev';keys[38]='prev';keys[CKEDITOR.SHIFT+9]='prev';keys[32]='click';},onOpen:function(){var doc=this._.panel._.iframe.getFrameDocument()
-var path=editor.elementPath();var firstBlock=path.block||path.blockLimit;var activeItem=doc.find('.cke_coloricon_active').getItem(0)
+if(editor.config.advancedEditor){var activeItem=doc.find('.cke_coloricon_active').getItem(0)
+if(activeItem)activeItem.removeClass('cke_coloricon_active')}else{var path=editor.elementPath();var firstBlock=path.block||path.blockLimit;var activeItem=doc.find('.cke_coloricon_active').getItem(0)
 if(activeItem)activeItem.removeClass('cke_coloricon_active')
 var defaultTr=doc.getById('cke_coloricon_default')
 defaultTr.hide()
@@ -2675,7 +2676,7 @@ colorNames.push('custom1','custom2')
 colorNames.some(function(colorName){var colorClass=config.colorButton_colorClassNamePattern.replace('%s',colorName)
 if(firstBlock.hasClass(colorClass)){defaultTr.show()
 doc.find('.cke_coloricon_'+colorName).getItem(0).addClass('cke_coloricon_active')
-return true}})
+return true}})}
 var customColors=config.colorButton_getCustomColors()
 var row=doc.getById(customColorRowId)
 if(!customColors){row.hide();return;}
@@ -2687,7 +2688,8 @@ function renderColors(panel,type,colorBoxId){var output=[],classNamePattern=conf
 var applyColorStyle=arguments.callee;function onColorDialogClose(evt){this.removeListener('ok',onColorDialogClose);this.removeListener('cancel',onColorDialogClose);evt.name=='ok'&&applyColorStyle(this.getContentElement('picker','selectedColor').getValue(),type);}
 if(color=='?'){editor.openDialog('colordialog',function(){this.on('ok',onColorDialogClose);this.on('cancel',onColorDialogClose);});return;}
 editor.focus();panel.hide();var selection=editor.getSelection();if(!selection){return;}
-editor.fire('saveSnapshot');if(editor.config.advancedEditor){var colorStyle=config['colorButton_'+type+'Style'];classNames.map(function(className){editor.removeStyle(new CKEDITOR.style(colorStyle,{className:className}))});if(color){var colorClassName=config.colorButton_colorClassNamePattern.replace('%s',color);colorStyle.childRule=function(element){return!(element.is('a')||element.getElementsByTag('a').count())||isUnstylable(element);};editor.applyStyle(new CKEDITOR.style(colorStyle,{className:colorClassName}));}}else{var range=editor.createRange();range.selectNodeContents(editor.editable());var iterator=range.createIterator();iterator.enlargeBr=true;while(block=iterator.getNextParagraph('p')){if(block.isReadOnly())continue;classNames.forEach(function(name){block.removeClass(name);})
+editor.fire('saveSnapshot');if(editor.config.advancedEditor){var range=editor.createRange();var selection=editor.getSelection()
+var colorStyle=config['colorButton_'+type+'Style'];if(color==='default'&&!selection.getSelectedText()){range.selectNodeContents(editor.editable());selection.selectRanges([range]);classNames.map(function(className){editor.removeStyle(new CKEDITOR.style(colorStyle,{className:className}))});selection.removeAllRanges()}else{classNames.map(function(className){editor.removeStyle(new CKEDITOR.style(colorStyle,{className:className}))});if(color){var colorClassName=config.colorButton_colorClassNamePattern.replace('%s',color);colorStyle.childRule=function(element){return!(element.is('a')||element.getElementsByTag('a').count())||isUnstylable(element);};editor.applyStyle(new CKEDITOR.style(colorStyle,{className:colorClassName}));}}}else{var range=editor.createRange();range.selectNodeContents(editor.editable());var iterator=range.createIterator();iterator.enlargeBr=true;while(block=iterator.getNextParagraph('p')){if(block.isReadOnly())continue;classNames.forEach(function(name){block.removeClass(name);})
 if(color!=="default"){block.addClass(className);}}
 editor.forceNextSelectionCheck();}
 editor.focus();editor.fire('saveSnapshot');});output.push('<table class="ck_btn_with_gray_border_top" style="table-layout: fixed; padding: 3px;" role="presentation" cellspacing=0 cellpadding=0>');for(var i=0,len=colors.length;i<len;i++){var colorName=colors[i],textClassName=classNamePattern.replace('%s',colorName),iconClassName='cke_coloricon_'+colorName
