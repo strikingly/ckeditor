@@ -381,6 +381,15 @@
 				var selection = editor.getSelection(),
 					attributes = plugin.getLinkAttributes( editor, data );
 
+				// fix link target when both have url and document tab in same dialog
+				var isLinkOpenInNewTab = data.type === 'url' && data.web.openInNewTab
+				var isDocumentOpenInNewTab = data.type === 'document' && data.document.openInNewTab
+				if (isLinkOpenInNewTab || isDocumentOpenInNewTab) {
+					attributes.set.target = '_blank'
+				} else {
+					attributes.set.target = '_self'
+				}
+
 				if (data.type === 'email' && !data.email.address || data.type === 'url' && !data.web.url || data.type === 'document' && !data.document.url) {
 					editor.execCommand('unlink');
 					return;
